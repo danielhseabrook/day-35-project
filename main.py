@@ -3,13 +3,15 @@ from datetime import datetime as dt
 from twilio.rest import Client
 import os
 
+weather_apikey = os.environ['ODO35_APIKEY']
 account_sid = os.environ['ODO35_ACCSID']
 auth_token = os.environ['ODO35_AUTHTOKEN']
-twilio_number = "+12545564699"
+twilio_number = environ['TWILIO_NUMBER']
+my_number = environ['MY_NUMBER']
 client = Client(account_sid, auth_token)
 parameters = {
     "q": "-33.88,151.15",
-    "key": os.environ['ODO35_APIKEY'],
+    "key": weather_apikey,
     "days": 2,
     "aqi": "no",
     "tides": "no",
@@ -35,6 +37,6 @@ if rain:
     client.messages.create(
         body="It's going to rain in the next 12 hours.",
         from_=twilio_number,
-        to="+61422621485"
+        to=my_number
     )
     print("It's going to rain in the next 12 hours")
